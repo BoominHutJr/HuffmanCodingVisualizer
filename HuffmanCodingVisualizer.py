@@ -5,13 +5,13 @@ import turtle
 from queue import PriorityQueue
 
 
-globalFileName =""
+globalFileName = ""
 
 def HuffmanCoding():
     counts = dict()
     Q = PriorityQueue()
     
-    openNewWindow()
+    OpenVisualizer()
 
     filename = filedialog.askopenfilename()
     print("Selected: ", filename)
@@ -45,9 +45,7 @@ def HuffmanCoding():
     curr = Q.get(1)[1]
 
     def path(node):
-        if node is None:
-            return None
-        else:
+        if node:
             path(left[node])
             if len(node) == 1:
                 print(counts[node], node)
@@ -57,10 +55,13 @@ def HuffmanCoding():
 
     path(curr)
 
+
+
 root = tkin.Tk()
 
-def openNewWindow():
+def OpenVisualizer():
     s= turtle.getscreen()
+
 
 
 root.geometry("1280x720")
