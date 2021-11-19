@@ -1,6 +1,7 @@
 
 import tkinter as tkin
-from tkinter import filedialog
+from tkinter import Toplevel, filedialog
+import turtle
 from queue import PriorityQueue
 
 
@@ -10,6 +11,8 @@ def HuffmanCoding():
     counts = dict()
     Q = PriorityQueue()
     
+    openNewWindow()
+
     filename = filedialog.askopenfilename()
     print("Selected: ", filename)
     globalFileName = filename
@@ -55,14 +58,19 @@ def HuffmanCoding():
     path(curr)
 
 root = tkin.Tk()
+
+def openNewWindow():
+    s= turtle.getscreen()
+
+
 root.geometry("1280x720")
+
 frame = tkin.Frame(root)
 frame.grid()
 
-greeting =tkin.Label(frame, text="Hello dickwad").grid(row=0, column=0)
-exitButton =tkin.Button(text="Quit retard", command=root.destroy).grid(row=1, column=0)
-runHuffmanCoding =tkin.Button(text="run huffman coding retard", command=HuffmanCoding).grid(row=3, column=0)
+instructions =tkin.Label(frame, text="Press the button below and select a file for which to"+
+                                        " generate a huffman tree.").grid(row=0, column=1)
+exitButton =tkin.Button(text="Quit retard", command=root.destroy).grid(row=1, column=1)
+runHuffmanCoding =tkin.Button(text="run huffman coding retard", command=HuffmanCoding).grid(row=2, column=1)
 
-root.mainloop()
-
-
+root.mainloop() 
