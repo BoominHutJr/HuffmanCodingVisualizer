@@ -2,12 +2,12 @@ from tkinter import filedialog
 from queue import PriorityQueue
 import tkinter
 
-counts = dict()
 Q = PriorityQueue()
-global left
-global right
+global counts, left, right
+counts = dict()
 left = dict()
 right = dict()
+
 
 def freq(fn):
     with open(fn) as sample:
@@ -41,7 +41,7 @@ def huffman_encoding():
         left[letters] = x[1]
         right[letters] = y[1]
         Q.put((z, letters))
-    
+    '''   
     def path(node):
         if node:
             path(left[node])
@@ -52,17 +52,47 @@ def huffman_encoding():
             path(right[node])
     path(Q.get(1)[1])
 
+    '''
+#TODO fix newline error
+#     stops outputting rest of tree when newline charachter is being printed
+    def levelOrderTraversal(node):
+        def printLevel(node, level):
+            if(node is None):
+                return False
+            if(level == 1):
+                if (left[node] is None and right[node] is None):
+                    print("{"+str(counts[node])+ " "+ str(node) +"} ", end= '')
+                else:    
+                    print(str(counts[node])+ " ", end= '')
+                return True
+            lChild = printLevel(left[node], level-1)
+            rChild = printLevel(right[node], level-1)
+
+            return rChild or lChild
+
+        level = 1
+        while printLevel(node, level):
+            level +=1
+
+    levelOrderTraversal(Q.get(1)[1])
+
+#TODO implement huffman decoding
 def huffman_decoding():
     pass
 
-def levelOrderTraversal():
+#TODO implement writing tree to a file
+def fileOutput():
     pass
 
+#TODO Implement a way to clear out the dicts after outputting a tree 
+#     found a bug where if you select a file twice through the GUI, it merges the files.
+def clearDict():
+    pass
 
+#sets up GUI interface
 root = tkinter.Tk()
 
 root.geometry("460x360")
-
 frame = tkinter.Frame(root)
 frame.grid()
 
@@ -70,9 +100,7 @@ instructions =tkinter.Label(frame, text="Press the button below and select a fil
                                         " generate a huffman tree.").grid(row=0, column=1)
 HuffmanEncoding =tkinter.Button(text="run huffman encoding ", command=huffman_encoding).grid(row=2, column=0)
 HuffmanDecoding =tkinter.Button(text="run huffman decoding ", command=huffman_decoding).grid(row=3, column=0)
-runlevelOrdertraversal =tkinter.Button(text="level order traversal ", command=levelOrderTraversal).grid(row=4, column=0)
 
-exitButton =tkinter.Button(text="After selecting a file, click here to close the window", command=root.destroy).grid(row=1, column=0)
-
+exitButton =tkinter.Button(text="After selecting a file, click here to close the window", command=root.destroy).grid(row=4, column=0)
 
 root.mainloop() 
