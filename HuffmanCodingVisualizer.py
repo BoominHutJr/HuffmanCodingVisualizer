@@ -53,8 +53,7 @@ def huffman_encoding():
     path(Q.get(1)[1])
 
     '''
-#TODO fix newline error
-#     stops outputting rest of tree when newline charachter is being printed
+    #fully implemented traversal function
     def levelOrderTraversal(node):
         def printLevel(node, level):
             if(node is None):
@@ -72,6 +71,7 @@ def huffman_encoding():
 
         level = 1
         while printLevel(node, level):
+            print("\n")
             level +=1
 
     levelOrderTraversal(Q.get(1)[1])
@@ -84,11 +84,6 @@ def huffman_decoding():
 def fileOutput():
     pass
 
-#TODO Implement a way to clear out the dicts after outputting a tree 
-#     found a bug where if you select a file twice through the GUI, it merges the files.
-def clearDict():
-    pass
-
 #sets up GUI interface
 root = tkinter.Tk()
 
@@ -98,9 +93,9 @@ frame.grid()
 
 instructions =tkinter.Label(frame, text="Press the button below and select a file for which to"+
                                         " generate a huffman tree.").grid(row=0, column=1)
-HuffmanEncoding =tkinter.Button(text="run huffman encoding ", command=huffman_encoding).grid(row=2, column=0)
-HuffmanDecoding =tkinter.Button(text="run huffman decoding ", command=huffman_decoding).grid(row=3, column=0)
+HuffmanEncoding =tkinter.Button(text="run huffman encoding ", command=lambda:[huffman_encoding(), root.destroy()]).grid(row=2, column=0)
+HuffmanDecoding =tkinter.Button(text="run huffman decoding ", command=lambda:[huffman_decoding(), root.destroy()]).grid(row=3, column=0)
 
-exitButton =tkinter.Button(text="After selecting a file, click here to close the window", command=root.destroy).grid(row=4, column=0)
+exitButton =tkinter.Button(text="Emergency Exit", command=root.destroy).grid(row=4, column=0)
 
-root.mainloop() 
+root.mainloop()
