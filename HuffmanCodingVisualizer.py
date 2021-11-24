@@ -41,18 +41,7 @@ def huffman_encoding():
         left[letters] = x[1]
         right[letters] = y[1]
         Q.put((z, letters))
-    '''   
-    def path(node):
-        if node:
-            path(left[node])
-            if len(node) == 1:
-                print(counts[node], node)
-            else:
-                print(counts[node])
-            path(right[node])
-    path(Q.get(1)[1])
-
-    '''
+    
     #fully implemented traversal function
     def levelOrderTraversal(node):
         def printLevel(node, level):
