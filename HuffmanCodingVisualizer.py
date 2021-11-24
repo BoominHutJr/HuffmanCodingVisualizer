@@ -1,20 +1,16 @@
-
-import tkinter as tkin
 from tkinter import filedialog
 from queue import PriorityQueue
+import tkinter
 
+counts = dict()
+Q = PriorityQueue()
+global left
+global right
+left = dict()
+right = dict()
 
-globalFileName = ""
-
-def HuffmanCoding():
-    counts = dict()
-    Q = PriorityQueue()
-    
-    filename = filedialog.askopenfilename()
-    print("Selected: ", filename)
-    globalFileName = filename
-
-    with open(globalFileName) as sample:
+def freq(fn):
+    with open(fn) as sample:
         text = sample.read()
 
     for i in range(len(text)):
@@ -25,6 +21,13 @@ def HuffmanCoding():
 
     for i in counts.keys():
         Q.put((counts[i],i))
+    
+
+def huffman_encoding():
+    filename = filedialog.askopenfilename()
+    print("Selected: ", filename)
+
+    freq(filename)
 
     left = dict.fromkeys(counts, None)
     right = dict.fromkeys(counts, None)
@@ -38,9 +41,7 @@ def HuffmanCoding():
         left[letters] = x[1]
         right[letters] = y[1]
         Q.put((z, letters))
-
-    curr = Q.get(1)[1]
-
+    
     def path(node):
         if node:
             path(left[node])
@@ -49,22 +50,29 @@ def HuffmanCoding():
             else:
                 print(counts[node])
             path(right[node])
+    path(Q.get(1)[1])
 
-    path(curr)
+def huffman_decoding():
+    pass
+
+def levelOrderTraversal():
+    pass
 
 
+root = tkinter.Tk()
 
-root = tkin.Tk()
+root.geometry("460x360")
 
-root.geometry("480x360")
-
-frame = tkin.Frame(root)
+frame = tkinter.Frame(root)
 frame.grid()
 
-instructions =tkin.Label(frame, text="Press the button below and select a file for which to"+
+instructions =tkinter.Label(frame, text="Press the button below and select a file for which to"+
                                         " generate a huffman tree.").grid(row=0, column=1)
-runHuffmanCoding =tkin.Button(text="run huffman coding ", command=HuffmanCoding).grid(row=2, column=0)
-exitButton =tkin.Button(text="After selecting a file, click here to close the window", command=root.destroy).grid(row=1, column=0)
+HuffmanEncoding =tkinter.Button(text="run huffman encoding ", command=huffman_encoding).grid(row=2, column=0)
+HuffmanDecoding =tkinter.Button(text="run huffman decoding ", command=huffman_decoding).grid(row=3, column=0)
+runlevelOrdertraversal =tkinter.Button(text="level order traversal ", command=levelOrderTraversal).grid(row=4, column=0)
+
+exitButton =tkinter.Button(text="After selecting a file, click here to close the window", command=root.destroy).grid(row=1, column=0)
 
 
 root.mainloop() 
