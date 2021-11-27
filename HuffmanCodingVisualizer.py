@@ -102,6 +102,7 @@ def huffman_encoding():
     convertToHex(encoded_output)
     #levelOrderTraversal(nodes[0])
     
+    
     #PRINT THE HUFFMAN TREE
     root = []
     def treeTraversal(node, parent=None):
@@ -122,6 +123,11 @@ def huffman_encoding():
                 r = r.parent
     treeTraversal(nodes[0])
     print_tree(root[0], horizontal=False)
+    
+    ######PRINT ENCODING RESULTS TO AN OUTPUT FILE######
+    outputFile = open("encodedOutput.txt", "w")
+    outputFile.write(encoded_output)
+
     
     return encoded_output, nodes[0] 
 
