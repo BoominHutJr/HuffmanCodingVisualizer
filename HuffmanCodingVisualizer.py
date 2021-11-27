@@ -2,6 +2,9 @@ import time
 import tkinter
 from tkinter import filedialog
 
+from pptree import *
+from pptree import Node as treeNode
+
 codes = dict()
 
 class Node:
@@ -98,6 +101,28 @@ def huffman_encoding():
     print(encoded_output)
     convertToHex(encoded_output)
     #levelOrderTraversal(nodes[0])
+    
+    #PRINT THE HUFFMAN TREE
+    root = []
+    def treeTraversal(node, parent=None):
+        if parent is None: 
+            #This is the root of the tree
+            n = treeNode( [node.symbol, node.count])
+            root.append(n)
+        else:
+            n = treeNode( [node.symbol, node.count], parent )
+        if node.right != None:
+            treeTraversal(node.right, n)
+        if node.left != None:
+            treeTraversal(node.left, n)
+        
+        else:
+            r = n
+            while r.parent != None:
+                r = r.parent
+    treeTraversal(nodes[0])
+    print_tree(root[0], horizontal=False)
+    
     return encoded_output, nodes[0] 
 
 def convertToHex(str):
