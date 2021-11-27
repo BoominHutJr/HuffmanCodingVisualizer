@@ -106,21 +106,21 @@ def huffman_encoding():
     #PRINT THE HUFFMAN TREE
     root = []
     def treeTraversal(node, parent=None):
+        nodeContent = str(node.symbol) + ": " + str(node.count) #node will show "character: count"
+        if len(node.symbol) > 1:
+            #If the node is a parent node, only show its count 
+            nodeContent = str(node.count)
+
         if parent is None: 
-            #This is the root of the tree
-            n = treeNode( [node.symbol, node.count])
+            #This is the root of the tree with no parent
+            n = treeNode(nodeContent)
             root.append(n)
         else:
-            n = treeNode( [node.symbol, node.count], parent )
+            n = treeNode( nodeContent, parent )
         if node.right != None:
             treeTraversal(node.right, n)
         if node.left != None:
             treeTraversal(node.left, n)
-        
-        else:
-            r = n
-            while r.parent != None:
-                r = r.parent
     treeTraversal(nodes[0])
     print_tree(root[0], horizontal=False)
     
