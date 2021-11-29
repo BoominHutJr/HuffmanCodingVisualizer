@@ -198,6 +198,11 @@ def huffman_decoding(root):
     timeB = time.time()
     print("\nTime Elapsed (in seconds): ", round(timeB-timeA,3))
     print("Decoded output: " + str(decoded_output))
+    
+    ###### PRINT DECODING RESULTS TO AN OUTPUT FILE ######
+    outputFile = open("decodedOutput.txt", "w")
+    outputFile.write(decoded_output)
+
     return 
 
 
