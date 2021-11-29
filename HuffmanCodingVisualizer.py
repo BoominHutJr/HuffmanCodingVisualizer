@@ -2,6 +2,7 @@ import time
 import tkinter
 from tkinter import filedialog
 
+#Note: the pptree library is NOT used to build a binary tree. It only prints the tree we built
 from pptree import *
 from pptree import Node as treeNode
 
