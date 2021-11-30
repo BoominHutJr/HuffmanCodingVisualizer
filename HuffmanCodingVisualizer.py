@@ -2,7 +2,8 @@ import time
 import tkinter
 from tkinter import filedialog
 
-#Note: the pptree library is NOT used to build a binary tree. It only prints the tree we built
+#Note: the pptree library is NOT used to build a huffman tree. It only prints the tree we built.
+#https://github.com/clemtoy/pptree
 from pptree import *
 from pptree import Node as treeNode
 
