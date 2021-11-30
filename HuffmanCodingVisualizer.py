@@ -2,7 +2,7 @@ import time
 import tkinter
 from tkinter import filedialog
 
-#Note: the pptree library is NOT used to build a huffman tree. It only prints the tree we built.
+#Note: the pptree library is NOT used to build a binary tree. It only prints the tree we built
 #https://github.com/clemtoy/pptree
 from pptree import *
 from pptree import Node as treeNode
@@ -55,12 +55,17 @@ def space_difference(data, coding):
     print("Space usage before compression (in bits):", before_compression)    
     print("Space usage after compression (in bits):",  after_compression)
 
+def convertToHex(str):
+    decimalValue = int(str, 2)
+    hexstring = hex(decimalValue)
+    print("Encoded output in hex: " + hexstring)
 
 
+######################### HUFFMAN ENCODING #########################
 def huffman_encoding():
-
+    print("\n--------Huffman Encoding--------")
     filename = filedialog.askopenfilename()
-    print("Selected: ", filename)
+    print("File Selected: ", filename)
 
     timeA = time.time()
 
@@ -70,8 +75,7 @@ def huffman_encoding():
     symbol_with_counts = get_counts(data)
     symbols = symbol_with_counts.keys()
     counts = symbol_with_counts.values()
-    print("symbols: ", symbols)
-    print("counts: ", counts)
+    print("Symbols with frequencies: ", symbol_with_counts)
     
     nodes = []
     
@@ -140,39 +144,12 @@ def huffman_encoding():
     return encoded_output, nodes[0] 
 
 
-
-#level order traversal incase its needed
-def levelOrderTraversal(node):
-    def printLevel(node, level):
-        if(node is None):
-            return False
-        if(level == 1):
-            if (node.left is None and node.right is None):
-                print("{"+str(codes[node])+ " "+ str(node) +"} ", end= '')
-            else:    
-                print(str(codes[node])+ " ", end= '')
-            return True
-        lChild = printLevel(node.left, level-1)
-        rChild = printLevel(node.right, level-1)
-        return rChild or lChild
-    level = 1
-    while printLevel(node, level):
-        print("\n")
-        level +=1
-
-
-def convertToHex(str):
-    decimalValue = int(str, 2)
-    hexstring = hex(decimalValue)
-    print("Encoded output in hex: " + hexstring)
-
-
-
+######################### HUFFMAN DECODING #########################
 #Huffman decoding can ONLY be run after huffman_encoding() has been called and built the huffman tree and encoded file
 def huffman_decoding(root):
-    print("\n\n-------Huffman Decoding-------")
+    print("\n--------Huffman Decoding--------")
     filename = filedialog.askopenfilename()
-    print("Selected: ", filename)
+    print("File Selected: ", filename)
     timeA = time.time()
 
     with open(filename) as sample:
@@ -198,9 +175,9 @@ def huffman_decoding(root):
                 node = node.right
         
     timeB = time.time()
-    print("\nTime Elapsed (in seconds): ", round(timeB-timeA,3))
+    print("Time Elapsed (in seconds): ", round(timeB-timeA,3))
     print("Decoded output: " + str(decoded_output))
-    
+
     ###### PRINT DECODING RESULTS TO AN OUTPUT FILE ######
     outputFile = open("decodedOutput.txt", "w")
     outputFile.write(decoded_output)
@@ -216,12 +193,10 @@ frame.grid()
 
 instructions =tkinter.Label(frame, text="Press the button below and select a file for which to"+
                                         " generate a huffman tree.").grid(row=0, column=1)
-#HuffmanEncoding =tkinter.Button(text="run huffman encoding ", command=lambda:[huffman_encoding(), root.destroy()]).grid(row=2, column=0)
-#HuffmanDecoding =tkinter.Button(text="run huffman decoding ", command=lambda:[huffman_decoding(), root.destroy()]).grid(row=3, column=0)
 HuffmanEncoding =tkinter.Button(text="run huffman encoding ", command=lambda:[huffman_encoding()]).grid(row=2, column=0)
 HuffmanDecoding =tkinter.Button(text="run huffman decoding ", command=lambda:[huffman_decoding(treeRoot[0])]).grid(row=3, column=0)
-
 
 exitButton =tkinter.Button(text="Emergency Exit", command=root.destroy).grid(row=4, column=0)
 
 root.mainloop()
+
