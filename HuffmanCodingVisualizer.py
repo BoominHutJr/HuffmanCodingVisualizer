@@ -1,5 +1,5 @@
 
-#Contributors: Francisco Chavez, Hassan, Ayman
+#Contributors: Francisco Chavez, Alhassan Elkossei, Ayman Fahsi
 import time
 import tkinter
 from tkinter import filedialog
