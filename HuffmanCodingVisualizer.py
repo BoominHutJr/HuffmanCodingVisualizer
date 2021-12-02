@@ -48,12 +48,12 @@ def Output_Encoded(data, coding):
     return string
 
 def space_difference(data, coding):
-    before_compression = len(data) * 8 # total bit space to store the data before compression
+    before_compression = len(data) * 8
     after_compression = 0
     symbols = coding.keys()
     for symbol in symbols:
         count = data.count(symbol)
-        after_compression += count * len(coding[symbol]) #calculate how many bit is required for that symbol in total
+        after_compression += count * len(coding[symbol]) 
     print("Space usage before compression (in bits):", before_compression)    
     print("Space usage after compression (in bits):",  after_compression)
 
@@ -76,35 +76,30 @@ def huffman_encoding():
     
     nodes = []
     
-    # converting symbols and probabilities into huffman tree nodes
     for symbol in symbols:
         nodes.append(Node(symbol_with_counts.get(symbol), symbol))
     
     while len(nodes) > 1:
-        # sort all the nodes in ascending order based on their frequency
         nodes = sorted(nodes, key=lambda x: x.count)
-        # for node in nodes:  
-        #      print(node.symbol, node.prob)
-    
-        # pick 2 smallest nodes
+           
         right = nodes[0]
         left = nodes[1]
     
         left.code = 0
         right.code = 1
     
-        # combine the 2 smallest nodes to create new node
-        newNode = Node(left.count+right.count, left.symbol+right.symbol, left, right)
+        sumNode = Node(left.count+right.count, left.symbol+right.symbol, left, right)
 
         nodes.remove(left)
         nodes.remove(right)
-        nodes.append(newNode)
+        nodes.append(sumNode)
             
     huffman_encoding_dictionary = Calculate_Codes(nodes[0])
     timeB = time.time()
-    print("symbols with codes", huffman_encoding_dictionary)
-    space_difference(data, huffman_encoding_dictionary)
     encoded_output = Output_Encoded(data,huffman_encoding_dictionary)
+    space_difference(data, huffman_encoding_dictionary)
+
+    print("symbols with codes", huffman_encoding_dictionary)
     print("Time Elapsed (in seconds): ", round(timeB-timeA,3))
     print("Encoded output: " + encoded_output)
 
