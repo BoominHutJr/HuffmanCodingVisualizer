@@ -1,3 +1,4 @@
+#Contributors: Francisco Chavez, Hassan, Ayman
 import time
 import tkinter
 from tkinter import filedialog
