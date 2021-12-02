@@ -1,3 +1,11 @@
+
+########################################################################
+# Created by:
+# Francisco Chavez
+# Ayman Fahsi
+# Alhassan Elkossei
+########################################################################
+
 import time
 import tkinter
 from tkinter import filedialog
@@ -181,7 +189,6 @@ def huffman_decoding(root):
     ###### PRINT DECODING RESULTS TO AN OUTPUT FILE ######
     outputFile = open("decodedOutput.txt", "w")
     outputFile.write(decoded_output)
-
     return 
 
 
