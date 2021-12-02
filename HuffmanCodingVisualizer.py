@@ -126,7 +126,8 @@ def huffman_encoding():
         if parent is None: 
             #This is the root of the tree with no parent
             n = treeNode(nodeContent)
-            root.append(n)
+            #Store the root of the tree to print
+            root.append(n) 
         else:
             n = treeNode( nodeContent, parent )
         if node.right != None:
@@ -136,7 +137,7 @@ def huffman_encoding():
 
     treeTraversal(nodes[0]) #Pass the root
     print('Huffman Tree:')
-    print_tree(root[0], horizontal=False)
+    print_tree(root[0], horizontal=False) #call print function by passing the root
 
     ###### PRINT ENCODING RESULTS TO AN OUTPUT FILE ######
     outputFile = open("encodedOutput.txt", "w")
@@ -160,6 +161,7 @@ def huffman_decoding(root):
     node = root #set the current node to the root of the tree
     decoded_output = ""
     #Go through each bit in the encoded data to navigate through the huffman tree
+    #Each leaf node in the tree represents an encoded symbol 
     for c in data:
         if c == '0':
             #If the left node is a leaf node, add its symbol to the output
