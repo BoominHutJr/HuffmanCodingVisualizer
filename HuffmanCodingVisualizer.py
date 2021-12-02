@@ -1,11 +1,5 @@
 
-########################################################################
-# Created by:
-# Francisco Chavez
-# Ayman Fahsi
-# Alhassan Elkossei
-########################################################################
-
+#Contributors: Francisco Chavez, Hassan, Ayman
 import time
 import tkinter
 from tkinter import filedialog
