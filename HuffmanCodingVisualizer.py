@@ -57,11 +57,6 @@ def space_difference(data, coding):
     print("Space usage before compression (in bits):", before_compression)    
     print("Space usage after compression (in bits):",  after_compression)
 
-def convertToHex(str):
-    decimalValue = int(str, 2)
-    hexstring = hex(decimalValue)
-    print("Encoded output in hex: " + hexstring)
-
 
 ######################### HUFFMAN ENCODING #########################
 def huffman_encoding():
@@ -112,7 +107,6 @@ def huffman_encoding():
     encoded_output = Output_Encoded(data,huffman_encoding_dictionary)
     print("Time Elapsed (in seconds): ", round(timeB-timeA,3))
     print("Encoded output: " + encoded_output)
-    convertToHex(encoded_output)
 
 
     ###### PRINT THE HUFFMAN TREE ######
